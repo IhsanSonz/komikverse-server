@@ -9,7 +9,8 @@ import generateRefreshToken from "../../helper/generateRefreshToken.js";
 import authenticateToken from "../../helper/authenticateToken.js";
 const { hash, genSalt } = bcrypt;
 
-const ROUTE_PATH = '/api/users';
+// const ROUTE_PATH = '/api/users';
+const ROUTE_PATH = '';
 
 router.post(`${ROUTE_PATH}/register`, (req, res) => {
   const { errors, isValid } = validateRegisterInput(req.body);

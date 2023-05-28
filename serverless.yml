@@ -7,5 +7,14 @@ provider:
   region: ap-southeast-1
 
 functions:
-  function1:
+  serverless:
     handler: server.handler
+    events:
+      - http:
+          path: / # this matches the base path
+          method: ANY
+          cors: true
+      - http:
+          path: /{any+} # this matches any path, the token 'any' doesn't mean anything special
+          method: ANY
+          cors: true

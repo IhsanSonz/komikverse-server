@@ -1,4 +1,5 @@
 {
+  "type": "module",
   "dependencies": {
     "aws-serverless-express": "^3.4.0",
     "bcryptjs": "^2.4.3",

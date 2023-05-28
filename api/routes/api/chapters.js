@@ -3,7 +3,8 @@ const router = Router();
 import Chapter from "../../models/Chapter.js";
 import catchValidationError from "../../helper/catchValidationError.js";
 
-const ROUTE_PATH = '/api/comics/:comicId/chapter';
+// const ROUTE_PATH = '/api/comics/:comicId/chapter';
+const ROUTE_PATH = '';
 
 router.post(`${ROUTE_PATH}/generate`, async (req, res) => {
   try {

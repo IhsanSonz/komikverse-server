@@ -3,7 +3,8 @@ const router = Router();
 import Comic from "../../models/Comic.js";
 import catchValidationError from "../../helper/catchValidationError.js";
 
-const ROUTE_PATH = '/api/comics';
+// const ROUTE_PATH = '/api/comics';
+const ROUTE_PATH = '';
 
 router.post(`${ROUTE_PATH}/create`, async (req, res) => {
   try {
@@ -75,6 +76,12 @@ router.get(`${ROUTE_PATH}/:id`, async (req, res) => {
     if (error.name === 'CastError') return res.status(404).send({ message: 'Not Found' });
     return res.status(400).json({ message: error.message });
   }
+})
+
+router.get('/test/test1/test2', (req, res) => {
+  return res.send({
+    message: 'Go Test!',
+  });
 })
 
 export default router;

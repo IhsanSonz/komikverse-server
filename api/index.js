@@ -24,15 +24,24 @@ export default function api(functionName) {
   app.use(cors());
 
   // Set router base path for local dev
-  const ENDPOINT = process.env.NODE_ENV === 'dev' ? `/${functionName}` : `/.netlify/functions/${functionName}/`
-  console.log(ENDPOINT);
+  // const ENDPOINT = process.env.NODE_ENV === 'dev' ? `/${functionName}` : `/.netlify/functions/${functionName}/`
+  const ENDPOINT = '/';
 
   //routes
   // app.use(express.static('public'))
-  app.use(ENDPOINT, users);
-  app.use(ENDPOINT, comics);
-  app.use(ENDPOINT, chapters);
-  app.use(ENDPOINT, images);
+  // app.use(ENDPOINT, users);
+  // app.use(ENDPOINT, comics);
+  // app.use(ENDPOINT, chapters);
+  // app.use(ENDPOINT, images);
+  app.use('/api/users', users);
+  app.use('/api/comics', comics);
+  app.use('/api/comics/:comicId/chapters', chapters);
+  app.use('/api/comics/:comicId/chapters/:chapterId/images', images);
+  app.get('/', (req, res) => {
+    return res.send({
+      message: 'Go Serverless v3.0! Your function executed successfully!',
+    });
+  })
 
   return app
 
