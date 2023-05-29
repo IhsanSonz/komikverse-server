@@ -35,8 +35,16 @@ export default function api(functionName) {
   // app.use(ENDPOINT, images);
   app.use('/api/users', users);
   app.use('/api/comics', comics);
-  app.use('/api/comics/:comicId/chapters', chapters);
-  app.use('/api/comics/:comicId/chapters/:chapterId/images', images);
+  app.use('/api/comics/:comicId/chapters', (req, res, next) => {
+    res.locals.comicId = req.params.comicId;
+    // return res.send({ message: 'Chapter route!' })
+    next();
+  }, chapters);
+  app.use('/api/comics/:comicId/chapters/:chapterId/images', (req, res, next) => {
+    res.locals.comicId = req.params.comicId;
+    res.locals.chapterId = req.params.chapterId;
+    next();
+  }, images);
   app.get('/', (req, res) => {
     return res.send({
       message: 'Go Serverless v3.0! Your function executed successfully!',

@@ -8,7 +8,7 @@ const ROUTE_PATH = '';
 
 router.post(`${ROUTE_PATH}/generate`, async (req, res) => {
   try {
-    const chapterId = req.params.chapterId;
+    const chapterId = req.params.chapterId ?? res.locals.chapterId;
     const { lang, image_data } = req.body;
 
     if (!Array.isArray(image_data)) {
@@ -48,7 +48,7 @@ router.post(`${ROUTE_PATH}/generate`, async (req, res) => {
 
 router.put(`${ROUTE_PATH}/:id/update`, async (req, res) => {
   try {
-    const chapterId = req.params.chapterId;
+    const chapterId = req.params.chapterId ?? res.locals.chapterId;
     const { lang, index, image_url } = req.body
     const image = await Image.findByIdAndUpdate(req.params.id, {
       chapterId,
@@ -84,7 +84,7 @@ router.delete(`${ROUTE_PATH}/:id/delete`, async (req, res) => {
 
 router.get(`${ROUTE_PATH}/:lang/all`, async (req, res) => {
   try {
-    const chapterId = req.params.chapterId;
+    const chapterId = req.params.chapterId ?? res.locals.chapterId;
     const lang = req.params.lang;
     const images = await Image.find({ chapterId, lang }).sort({ index: 1 });
     res.send(images);

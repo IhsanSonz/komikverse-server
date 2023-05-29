@@ -8,7 +8,7 @@ const ROUTE_PATH = '';
 
 router.post(`${ROUTE_PATH}/generate`, async (req, res) => {
   try {
-    const comicId = req.params.comicId;
+    const comicId = req.params.comicId ?? res.locals.comicId;
 
     if (!Array.isArray(req.body)) {
       const chapterCheck = await Chapter.findOneAndRemove({ comicId, index: req.body.index });
@@ -43,7 +43,7 @@ router.post(`${ROUTE_PATH}/generate`, async (req, res) => {
 
 router.put(`${ROUTE_PATH}/:id/update`, async (req, res) => {
   try {
-    const comicId = req.params.comicId;
+    const comicId = req.params.comicId ?? res.locals.comicId;
     const chapter = await Chapter.findByIdAndUpdate(req.params.id, {
       comicId,
       index: req.body.index,
@@ -77,8 +77,7 @@ router.delete(`${ROUTE_PATH}/:id/delete`, async (req, res) => {
 
 router.get(`${ROUTE_PATH}/all`, async (req, res) => {
   try {
-    console.log(req.params.comicId)
-    const comicId = req.params.comicId;
+    const comicId = req.params.comicId ?? res.locals.comicId;
     const index = req.query.index ?? 1;
     const chapters = await Chapter.find({ comicId }).sort({ index });
     res.send(chapters);
