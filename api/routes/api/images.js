@@ -34,9 +34,9 @@ router.post(`${ROUTE_PATH}/generate`, async (req, res) => {
       }
     });
     await Image.create(newImages);
-    const chapterList = await Image.find({ chapterId }).sort({ lang: 1, index: 1 })
-    console.log(chapterId, chapterList);
-    res.send(chapterList);
+    const imageList = await Image.find({ chapterId }).sort({ lang: 1, index: 1 })
+    console.log(chapterId, imageList);
+    res.send(imageList);
   } catch (error) {
     console.error(error);
     if (error.name === 'CastError') return res.status(404).send({ message: 'Not Found' });
