@@ -6,7 +6,7 @@ import api from './api/index.js'
 const functionName = 'serverless'
 
 // Initialize express app
-const app = api(functionName)
+const app = api()
 const server = createServer(app)
 
 // Export lambda handler

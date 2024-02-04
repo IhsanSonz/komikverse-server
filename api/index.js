@@ -11,7 +11,7 @@ import comics from "./routes/api/comics.js";
 import chapters from "./routes/api/chapters.js";
 import images from "./routes/api/images.js";
 
-export default function api(functionName) {
+export default function api() {
 
   dotenv.config();
 
@@ -23,21 +23,10 @@ export default function api(functionName) {
   app.use(json());
   app.use(cors());
 
-  // Set router base path for local dev
-  // const ENDPOINT = process.env.NODE_ENV === 'dev' ? `/${functionName}` : `/.netlify/functions/${functionName}/`
-  const ENDPOINT = '/';
-
-  //routes
-  // app.use(express.static('public'))
-  // app.use(ENDPOINT, users);
-  // app.use(ENDPOINT, comics);
-  // app.use(ENDPOINT, chapters);
-  // app.use(ENDPOINT, images);
   app.use('/api/users', users);
   app.use('/api/comics', comics);
   app.use('/api/comics/:comicId/chapters', (req, res, next) => {
     res.locals.comicId = req.params.comicId;
-    // return res.send({ message: 'Chapter route!' })
     next();
   }, chapters);
   app.use('/api/comics/:comicId/chapters/:chapterId/images', (req, res, next) => {
